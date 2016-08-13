@@ -1,0 +1,17 @@
+{"vendor":{"plugins/sliced-invoices-gravity-forms":"1.0"},
+	"admin-config": {
+		"gf_feed": {
+			"pages":{"admin.php":"page=gf_edit_forms"},
+			"forms":{
+				"gform-settings":{
+					"fields":{
+						"post_type0":{},
+						"post_type0_label":{"jquery":"label[for=post_type0] span","encode":"display"},
+						"post_type1":{},
+						"post_type1_label":{"jquery":"label[for=post_type1] span","encode":"display"}
+					}
+				}
+			}
+		}
+	}
+}
