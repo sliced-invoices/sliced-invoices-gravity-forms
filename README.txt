@@ -57,7 +57,7 @@ You can also set up confirmations and notifications as per normal in the Gravity
 == Frequently Asked Questions ==
 
 = Using Pre-Defined Line Items =
-You can include your pre-defined line items as an option by using the List field type. To do this, add a List field with 4 columns named something like Qty, Title, Description, Amount (you can name them what you like but they must be in this order). In the Advanced tab of the List field, tick the 'Allow field to be populated dynamically' box and add 'sliced_line_items' as the Parameter name (without the quotes). 
+You can include your pre-defined line items as an option by using the List field type. To do this, add a List field with 4 columns named something like Qty, Title, Amount, Description (you can name them what you like but they must be in this order). In the Advanced tab of the List field, tick the 'Allow field to be populated dynamically' box and add 'sliced_line_items' as the Parameter name (without the quotes). 
 Now in the Feed Settings section, you need to map the Line Items field to Line Items (Full) in the dropdown. 
 It will now automatically add a dropdown into the list field with your pre-defined line items.
 
