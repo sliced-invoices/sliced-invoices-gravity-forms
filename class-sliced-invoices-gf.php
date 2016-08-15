@@ -210,6 +210,15 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 								)
 							),
 							array(
+								'name'       => 'invoice_number',
+								'label'      => __( 'Invoice Number', 'sliced-invoices-gravity-forms' ),
+								'required'   => 0,
+								'dependency' => array(
+									'field'  => 'post_type',
+									'values' => sliced_get_invoice_label()
+								)
+							),
+							array(
 								'name'       => 'order_number',
 								'label'      => __( 'Order Number', 'sliced-invoices-gravity-forms' ),
 								'required'   => 0,
@@ -266,6 +275,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		$mapped_title      = $feed['meta']['mappedFields_title'];
 		$mapped_desc       = $feed['meta']['mappedFields_description'];
 		$mapped_quote_num  = $feed['meta']['mappedFields_quote_number'];
+		$mapped_inv_num    = $feed['meta']['mappedFields_invoice_number'];
 		$mapped_order_num  = $feed['meta']['mappedFields_order_number'];
 		$mapped_line_items = $feed['meta']['mappedFields_line_items'];
 
@@ -284,8 +294,13 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		wp_set_object_terms( $id, array( 'draft' ), $taxonomy );
 
 		// insert the post_meta
-		$prefix = $post_type == 'invoice' ? sliced_get_invoice_prefix() : sliced_get_quote_prefix();
-		$number = $post_type == 'invoice' ? sliced_get_next_invoice_number() : ( $mapped_quote_num > '' ? $this->get_field_value( $form, $entry, $mapped_quote_num ) : sliced_get_next_quote_number() );
+		if ( $post_type === 'invoice' ) {
+			$prefix = sliced_get_invoice_prefix();
+			$number = $mapped_inv_num > '' ? $this->get_field_value( $form, $entry, $mapped_inv_num ) : sliced_get_next_invoice_number();
+		} else {
+			$prefix = sliced_get_quote_prefix();
+			$number = $mapped_quote_num > '' ? $this->get_field_value( $form, $entry, $mapped_quote_num ) : sliced_get_next_quote_number();
+		}
 		update_post_meta( $id, '_sliced_description', wp_kses_post( $this->get_field_value( $form, $entry, $mapped_desc ) ) );
 		update_post_meta( $id, '_sliced_' . $post_type . '_created', time() );
 		update_post_meta( $id, '_sliced_' . $post_type . '_prefix', esc_html( $prefix ) );
