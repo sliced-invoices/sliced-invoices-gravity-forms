@@ -4,7 +4,7 @@ Donate link: http://slicedinvoices.com/
 Tags: gravity forms, gravity forms add on, gravity invoice, gravity forms invoice, gravity forms estimate, gravity forms quote, invoice, invoicing, quotes, estimates, invoice clients, quote request, estimate request
 Requires at least: 4.0
 Tested up to: 4.5.3
-Stable tag: 1.04
+Stable tag: 1.05
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,17 +70,22 @@ It will now automatically add a dropdown into the list field with your pre-defin
 
 
 == Changelog ==
+=1.05 =
+* NEW: add support for qTranslate X (i18n multilingual)
+* UPDATE: Add ability to map custom invoice numbers
+* FIX: Quotes & Invoices created via feed not incrementing quote number / invoice number
+
 =1.04 =
-UPDATE: Add ability to map custom quote numbers
+* UPDATE: Add ability to map custom quote numbers
 
 =1.03 =
-UPDATE: Integration with Gravity Flow - gravityflow.io
+* UPDATE: Integration with Gravity Flow - gravityflow.io
 
 =1.02 =
-UPDATE: Add ability to include pre-defined line items
+* UPDATE: Add ability to include pre-defined line items
 
 =1.01 =
-FIX: Minor bug fixes
+* FIX: Minor bug fixes
 
 =1.0 =
 * Initial release at WordPress.org
