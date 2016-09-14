@@ -319,11 +319,15 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 			if ( $items ) {
 				foreach ( $items as $index => $item ) {
 					$item = array_values( $item ); // change to indexed array to allow different naming conventions of items
-					list( $qty, $title, $price, $desc ) = explode( '|', $item[1] );
-					$title         = trim( $title );
+					$exploded_item = explode( '|', $item[1] );
+					if ( count( $exploded_item ) > 1 ) {
+						$title = $exploded_item[1]; // must be from dynamically populated drop down
+					} else {
+						$title = $exploded_item[0]; // must be from a plain text field
+					}
 					$items_array[] = array(
 						'qty'         => $item[0] ? esc_html( $item[0] ) : '',
-						'title'       => esc_html( $title ),
+						'title'       => esc_html( trim( $title ) ),
 						'description' => $item[3] ? wp_kses_post( $item[3] ) : '',
 						'amount'      => $item[2] ? esc_html( $item[2] ) : '',
 					);
