@@ -5,7 +5,7 @@
  * Plugin Name:       Sliced Invoices & Gravity Forms
  * Plugin URI:        https://slicedinvoices.com/extensions/gravity-forms
  * Description:       Create forms that allow users to submit a quote or estimate request. Requirements: The Sliced Invoices Plugin and Gravity Forms
- * Version:           1.05
+ * Version:           1.06
  * Author:            Sliced Invoices
  * Author URI:        https://slicedinvoices.com/
  * Text Domain:       sliced-invoices-gravity-forms

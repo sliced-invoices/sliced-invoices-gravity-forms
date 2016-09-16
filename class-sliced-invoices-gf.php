@@ -9,7 +9,7 @@ GFForms::include_feed_addon_framework();
 
 class Sliced_Invoices_GF extends GFFeedAddOn {
 
-	protected $_version = '1.05';
+	protected $_version = '1.06';
 	protected $_min_gravityforms_version = '1.9.10';
 	protected $_slug = 'slicedinvoices';
 	protected $_path = 'sliced-invoices-gravity-forms/sliced-invoices-gravity-forms.php';
