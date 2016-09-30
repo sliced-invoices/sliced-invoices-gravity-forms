@@ -4,7 +4,7 @@ Donate link: http://slicedinvoices.com/
 Tags: gravity forms, gravity forms add on, gravity invoice, gravity forms invoice, gravity forms estimate, gravity forms quote, invoice, invoicing, quotes, estimates, invoice clients, quote request, estimate request
 Requires at least: 4.0
 Tested up to: 4.6.1
-Stable tag: 1.06
+Stable tag: 1.07
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ It will now automatically add a dropdown into the list field with your pre-defin
 
 
 == Changelog ==
+=1.07 =
+* FIX: Translation issue preventing correct processing of feed
+
 =1.06 =
 * UPDATE: allow line items to work without GF dynamic population
 
