@@ -147,9 +147,11 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 						'choices'    => array(
 							array(
 								'label' => sliced_get_quote_label(),
+								'value' => 'quote',
 							),
 							array(
-								'label' => sliced_get_invoice_label()
+								'label' => sliced_get_invoice_label(),
+								'value' => 'invoice',
 							),
 						),
 						'onchange' => 'jQuery(this).parents("form").submit();',
@@ -206,7 +208,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 								'required'   => 0,
 								'dependency' => array(
 									'field'  => 'post_type',
-									'values' => sliced_get_quote_label()
+									'values' => 'quote',
 								)
 							),
 							array(
@@ -215,7 +217,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 								'required'   => 0,
 								'dependency' => array(
 									'field'  => 'post_type',
-									'values' => sliced_get_invoice_label()
+									'values' => 'invoice',
 								)
 							),
 							array(
@@ -224,7 +226,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 								'required'   => 0,
 								'dependency' => array(
 									'field'  => 'post_type',
-									'values' => sliced_get_invoice_label()
+									'values' => 'invoice',
 								)
 							),
 						)
