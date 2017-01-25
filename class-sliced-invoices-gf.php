@@ -299,17 +299,20 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		if ( $post_type === 'invoice' ) {
 			$prefix = sliced_get_invoice_prefix();
 			$number = $this->get_field_value( $form, $entry, $mapped_inv_num ) > '' ? $this->get_field_value( $form, $entry, $mapped_inv_num ) : sliced_get_next_invoice_number();
-			Sliced_Invoice::update_invoice_number();
 		} else {
 			$prefix = sliced_get_quote_prefix();
 			$number = $this->get_field_value( $form, $entry, $mapped_quote_num ) > '' ? $this->get_field_value( $form, $entry, $mapped_quote_num ) : sliced_get_next_quote_number();
-			Sliced_Quote::update_quote_number();
 		}
 		update_post_meta( $id, '_sliced_description', wp_kses_post( $this->get_field_value( $form, $entry, $mapped_desc ) ) );
 		update_post_meta( $id, '_sliced_' . $post_type . '_created', time() );
 		update_post_meta( $id, '_sliced_' . $post_type . '_prefix', esc_html( $prefix ) );
 		update_post_meta( $id, '_sliced_' . $post_type . '_number', esc_html( $number ) );
 		update_post_meta( $id, '_sliced_order_number', esc_html( $this->get_field_value( $form, $entry, $mapped_order_num ) ) );
+		if ( $post_type === 'invoice' ) {
+			Sliced_Invoice::update_invoice_number( $id );
+		} else {
+			Sliced_Quote::update_quote_number( $id );
+		}
 
 		/*
 		 * add the line items
