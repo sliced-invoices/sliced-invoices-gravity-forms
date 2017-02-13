@@ -358,6 +358,8 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		);
 
 		$client_id = $this->maybe_add_client( $client_array );
+		
+		do_action( 'sliced_gravityforms_feed_processed', $id, $feed, $entry, $form );
 
 	}
 
