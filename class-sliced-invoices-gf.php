@@ -16,6 +16,11 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	protected $_full_path = __FILE__;
 	protected $_title = 'Sliced Invoices';
 	protected $_short_title = 'Sliced Invoices';
+	
+	protected $_capabilities_settings_page = 'gravityforms_slicedinvoices';
+	protected $_capabilities_form_settings = 'gravityforms_slicedinvoices';
+	protected $_capabilities_uninstall = 'gravityforms_slicedinvoices_uninstall';
+	protected $_capabilities = array( 'gravityforms_slicedinvoices', 'gravityforms_slicedinvoices_uninstall' );
 
 	private static $_instance = null;
 
