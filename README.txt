@@ -4,7 +4,7 @@ Donate link: http://slicedinvoices.com/
 Tags: gravity forms, gravity forms add on, gravity invoice, gravity forms invoice, gravity forms estimate, gravity forms quote, invoice, invoicing, quotes, estimates, invoice clients, quote request, estimate request
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 1.08
+Stable tag: 1.09
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,10 @@ It will now automatically add a dropdown into the list field with your pre-defin
 
 
 == Changelog ==
+=1.09 =
+* NEW: Add hook 'sliced_gravityforms_feed_processed'
+* UPDATE: add explicit capabilities for use with Members plugin
+
 =1.08 =
 * UPDATE: compatibility with Sliced Invoices v3.3.0
 
