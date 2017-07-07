@@ -132,6 +132,39 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	 * @since  1.0.0
 	 */
 	public function feed_settings_fields() {
+		
+		$translate = get_option( 'sliced_translate' );
+	
+		$quote_status_options = array(
+			array(
+				'label' => ( ( isset( $translate['draft'] ) && class_exists( 'Sliced_Translate' ) ) ? $translate['draft'] : __( 'Draft', 'sliced-invoices' ) ) . ' ' . __( '(default)', 'sliced-invoices-gravity-forms' ),
+				'value' => 'draft',
+			),
+		);
+		$quote_statuses = get_terms( 'quote_status', array( 'hide_empty' => 0 ) );
+		foreach ( $quote_statuses as $quote_status ) {
+			if ( $quote_status->slug === 'draft' ) { continue; }
+			$quote_status_options[] = array(
+				'label' => ( ( isset( $translate[$quote_status->slug] ) && class_exists( 'Sliced_Translate' ) ) ? $translate[$quote_status->slug] : __( ucfirst( $quote_status->name ), 'sliced-invoices' ) ),
+				'value' => esc_attr( $quote_status->slug ),
+			);
+		}
+		
+		$invoice_status_options = array(
+			array(
+				'label' => ( ( isset( $translate['draft'] ) && class_exists( 'Sliced_Translate' ) ) ? $translate['draft'] : __( 'Draft', 'sliced-invoices' ) ) . ' ' . __( '(default)', 'sliced-invoices-gravity-forms' ),
+				'value' => 'draft',
+			),
+		);
+		$invoice_statuses = get_terms( 'invoice_status', array( 'hide_empty' => 0 ) );
+		foreach ( $invoice_statuses as $invoice_status ) {
+			if ( $invoice_status->slug === 'draft' ) { continue; }
+			$invoice_status_options[] = array(
+				'label' => ( ( isset( $translate[$invoice_status->slug] ) && class_exists( 'Sliced_Translate' ) ) ? $translate[$invoice_status->slug] : __( ucfirst( $invoice_status->name ), 'sliced-invoices' ) ),
+				'value' => esc_attr( $invoice_status->slug ),
+			);
+		}
+		
 		return array(
 			array(
 				'title'  => __( 'Configure your feed settings', 'sliced-invoices-gravity-forms' ),
@@ -205,7 +238,8 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 							array(
 								'name'     => 'line_items',
 								'label'    => __( 'Line Items', 'sliced-invoices-gravity-forms' ),
-								'required' => 0
+								'required' => 0,
+								'tooltip'  => __( 'This must map to a "List" field in your form.  If you are using "Product" fields instead, leave this setting blank and check the "Use Product field(s) for Line Items" box below.', 'sliced-invoices-gravity-forms' ),
 							),
 							array(
 								'name'       => 'quote_number',
@@ -235,6 +269,59 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 								)
 							),
 						)
+					),
+					array(
+						'label'     => __( 'Use Product field(s) for Line Items', 'sliced-invoices-gravity-forms' ),
+						'type'      => 'checkbox',
+						'name'      => 'product_fields',
+						'choices'   => array(
+							array(
+								'label'         => '',
+								'name'          => 'use_product_fields',
+								'default_value' => 0,
+								'tooltip'   => __( 'If this box is checked, Sliced Invoices will search your form for any Product fields and create line items from them.  This will override anything else in your "Line Items" setting above.', 'sliced-invoices-gravity-forms' ),
+							),
+						),
+					),
+					array(
+						'label'      => __( sprintf( 'Set %s status', sliced_get_quote_label() ), 'sliced-invoices-gravity-forms' ),
+						'type'       => 'select',
+						'name'       => 'set_quote_status',
+						'horizontal' => true,
+						'choices'    => $quote_status_options,
+						'dependency' => array(
+							'field'  => 'post_type',
+							'values' => 'quote',
+						),
+					),
+					array(
+						'label'      => __( sprintf( 'Set %s status', sliced_get_invoice_label() ), 'sliced-invoices-gravity-forms' ),
+						'type'       => 'select',
+						'name'       => 'set_invoice_status',
+						'horizontal' => true,
+						'choices'    => $invoice_status_options,
+						'dependency' => array(
+							'field'  => 'post_type',
+							'values' => 'invoice',
+						),
+					),
+					array(
+						'label'      => __( 'Send to client?', 'sliced-invoices-gravity-forms' ),
+						'type'       => 'radio',
+						'name'       => 'send_to_client',
+						'horizontal' => true,
+						'tooltip'    => __( sprintf( 'If set to "Yes", the %s/%s will automatically be emailed to the client as soon as it is created. (Default is "No")', sliced_get_quote_label(), sliced_get_invoice_label() ), 'sliced-invoices-gravity-forms' ),
+						'default_value' => 'no',
+						'choices'    => array(
+							array(
+								'label' => __( 'Yes', 'sliced-invoices-gravity-forms' ),
+								'value' => 'yes',
+							),
+							array(
+								'label' => __( 'No', 'sliced-invoices-gravity-forms' ),
+								'value' => 'no',
+							),
+						),
 					),
 					array(
 						'name'           => 'condition',
@@ -273,19 +360,23 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	 */
 	public function process_feed( $feed, $entry, $form ) {
 
-		$post_type         = strtolower( $feed['meta']['post_type'] );
-		$mapped_email      = $feed['meta']['mappedFields_email'];
-		$mapped_name       = $feed['meta']['mappedFields_name'];
-		$mapped_business   = $feed['meta']['mappedFields_business'];
-		$mapped_address    = $feed['meta']['mappedFields_address'];
-		$mapped_extra      = $feed['meta']['mappedFields_extra_info'];
-		$mapped_title      = $feed['meta']['mappedFields_title'];
-		$mapped_desc       = $feed['meta']['mappedFields_description'];
-		$mapped_quote_num  = $feed['meta']['mappedFields_quote_number'];
-		$mapped_inv_num    = $feed['meta']['mappedFields_invoice_number'];
-		$mapped_order_num  = $feed['meta']['mappedFields_order_number'];
-		$mapped_line_items = $feed['meta']['mappedFields_line_items'];
-
+		$post_type          = strtolower( $feed['meta']['post_type'] );
+		$mapped_email       = $feed['meta']['mappedFields_email'];
+		$mapped_name        = $feed['meta']['mappedFields_name'];
+		$mapped_business    = $feed['meta']['mappedFields_business'];
+		$mapped_address     = $feed['meta']['mappedFields_address'];
+		$mapped_extra       = $feed['meta']['mappedFields_extra_info'];
+		$mapped_title       = $feed['meta']['mappedFields_title'];
+		$mapped_desc        = $feed['meta']['mappedFields_description'];
+		$mapped_quote_num   = $feed['meta']['mappedFields_quote_number'];
+		$mapped_inv_num     = $feed['meta']['mappedFields_invoice_number'];
+		$mapped_order_num   = $feed['meta']['mappedFields_order_number'];
+		$mapped_line_items  = $feed['meta']['mappedFields_line_items'];
+		$use_product_fields = $feed['meta']['use_product_fields'];
+		$set_quote_status   = $feed['meta']['set_quote_status'];
+		$set_invoice_status = $feed['meta']['set_invoice_status'];
+		$send_to_client     = $feed['meta']['send_to_client'];
+		
 		$post_array = array(
 			'post_content' => '',
 			'post_title'   => $this->get_field_value( $form, $entry, $mapped_title ),
@@ -296,9 +387,15 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		// insert the post
 		$id = wp_insert_post( $post_array, $wp_error = false );
 
-		// set to a draft
+		// set status
+		$status = 'draft'; // default
 		$taxonomy = $post_type . '_status';
-		wp_set_object_terms( $id, array( 'draft' ), $taxonomy );
+		if ( $post_type === 'quote' && $set_quote_status ) {
+			$status = $set_quote_status;
+		} elseif ( $post_type === 'invoice' && $set_invoice_status ) {
+			$status = $set_invoice_status;
+		}
+		wp_set_object_terms( $id, array( $status ), $taxonomy );
 
 		// insert the post_meta
 		if ( $post_type === 'invoice' ) {
@@ -328,7 +425,46 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		/*
 		 * add the line items
 		 */
-		if ( ! empty( $mapped_line_items ) ) {
+		if ( $use_product_fields ) {
+		
+			$products = GFCommon::get_product_fields( $form, $entry );
+			if ( ! empty( $products['products'] ) ) {
+				
+				$line_items = array();
+				foreach ( $products['products'] as $product ) {
+					$options = array();
+					if ( is_array( rgar( $product, 'options' ) ) ) {
+						foreach ( $product['options'] as $option ) {
+							$options[] = $option['option_name'];
+						}
+					}
+					$description = '';
+					if ( ! empty( $options ) ) {
+						$description = esc_html__( 'options: ', 'slicd-invoices-gravity-forms' ) . ' ' . implode( ', ', $options );
+					}
+					$line_items[] = array(
+						'qty'         => esc_html( rgar( $product, 'quantity' ) ),
+						'title'       => esc_html( rgar( $product, 'name' ) ),
+						'description' => wp_kses_post( $description ),
+						'amount'      => GFCommon::to_number( rgar( $product, 'price', 0 ), $entry['currency'] ),
+					);
+				}
+				if ( ! empty( $products['shipping']['name'] ) ) {
+					$line_items[] = array(
+						'qty'         => 1,
+						'title'       => esc_html( $products['shipping']['name'] ),
+						'description' => '',
+						'amount'      => GFCommon::to_number( rgar( $products['shipping'], 'price', 0 ), $entry['currency'] ),
+					);
+				}
+				if ( ! empty( $line_items ) ) {
+					update_post_meta( $id, '_sliced_items', $line_items );
+				}
+				
+			}
+			
+		} elseif ( ! empty( $mapped_line_items ) ) {
+		
 			// loop through the line items and put into our format
 			$items       = unserialize( rgar( $entry, $mapped_line_items ) ); // unserialize the array
 			$items_array = array();
@@ -350,6 +486,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 				}
 			}
 			add_post_meta( $id, '_sliced_items', $items_array );
+			
 		}
 
 		// put the client details into array
@@ -364,6 +501,17 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		);
 
 		$client_id = $this->maybe_add_client( $client_array );
+		
+		if ( $send_to_client === 'yes' ) {
+			$send = new Sliced_Notifications;
+			if ( $post_type === 'invoice' ) {
+				$send->send_the_invoice( $id );
+			} else {
+				$send->send_the_quote( $id );
+			}
+			// set the status again, because send_the_invoice() and send_the_quote() change the status to "sent"
+			wp_set_object_terms( $id, array( $status ), $taxonomy );
+		}
 		
 		do_action( 'sliced_gravityforms_feed_processed', $id, $feed, $entry, $form );
 
