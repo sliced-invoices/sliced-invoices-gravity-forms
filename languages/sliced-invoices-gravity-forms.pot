@@ -1,0 +1,178 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Sliced Invoices & Gravity Forms\n"
+"POT-Creation-Date: 2017-07-07 01:40-0700\n"
+"PO-Revision-Date: 2017-07-07 01:40-0700\n"
+"Last-Translator: \n"
+"Language-Team: Sliced Invoices <info@slicedinvoices.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: sliced-invoices-gravity-forms.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: class-sliced-invoices-gf.php:140 class-sliced-invoices-gf.php:155
+msgid "Draft"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:140 class-sliced-invoices-gf.php:155
+msgid "(default)"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:170
+msgid "Configure your feed settings"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:173
+msgid "Feed Name"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:176
+msgid "This can be anything, such as Quote Request Feed"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:180
+msgid "Type"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:184
+msgid "Choose whether to create a Quote or an Invoice"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:199
+msgid "Map Fields"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:205
+msgid "Client Name"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:210
+msgid "Client Email"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:215
+msgid "Business Name"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:220
+msgid "Business Address"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:225
+msgid "Extra Info"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:230
+msgid "Title"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:235
+msgid "Description"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:240
+msgid "Line Items"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:242
+msgid ""
+"This must map to a \"List\" field in your form.  If you are using \"Product"
+"\" fields instead, leave this setting blank and check the \"Use Product "
+"field(s) for Line Items\" box below."
+msgstr ""
+
+#: class-sliced-invoices-gf.php:246
+msgid "Quote Number"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:255
+msgid "Invoice Number"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:264
+msgid "Order Number"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:274
+msgid "Use Product field(s) for Line Items"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:282
+msgid ""
+"If this box is checked, Sliced Invoices will search your form for any "
+"Product fields and create line items from them.  This will override anything "
+"else in your \"Line Items\" setting above."
+msgstr ""
+
+#: class-sliced-invoices-gf.php:309
+msgid "Send to client?"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:317
+msgid "Yes"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:321
+msgid "No"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:328
+msgid "Condition"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:330
+msgid "Enable Condition"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:331
+msgid "Process this feed if "
+msgstr ""
+
+#: class-sliced-invoices-gf.php:346
+msgid "Name"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:347
+msgid "Post Type"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:443
+msgid "options: "
+msgstr ""
+
+#: class-sliced-invoices-gf.php:692
+#, php-format
+msgid "%sSliced Invoices%s is required."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Sliced Invoices & Gravity Forms"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://slicedinvoices.com/extensions/gravity-forms"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Create forms that allow users to submit a quote or estimate request. "
+"Requirements: The Sliced Invoices Plugin and Gravity Forms"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Sliced Invoices"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://slicedinvoices.com/"
+msgstr ""
