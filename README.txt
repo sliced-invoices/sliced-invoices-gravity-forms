@@ -3,8 +3,8 @@ Contributors: SlicedInvoices
 Donate link: http://slicedinvoices.com/
 Tags: gravity forms, gravity forms add on, gravity invoice, gravity forms invoice, gravity forms estimate, gravity forms quote, invoice, invoicing, quotes, estimates, invoice clients, quote request, estimate request
 Requires at least: 4.0
-Tested up to: 4.7
-Stable tag: 1.09
+Tested up to: 4.8
+Stable tag: 1.10.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,13 @@ You can include your pre-defined line items as an option by using the List field
 Now in the Feed Settings section, you need to map the Line Items field to Line Items (Full) in the dropdown. 
 It will now automatically add a dropdown into the list field with your pre-defined line items.
 
+= Using Product fields for Line Items =
+You can also use Gravity Forms' Product fields as line items, instead of the List field type described above.  To do this, simply check the "Use Product field(s) for Line Items" box on the feed settings page.  Sliced Invoices will search your form for all Product fields and add them as line items automatically.
+
+= Does this work with Gravity Flow =
+
+Yes! [Gravity Flow](https://gravityflow.io/) is a very powerful addition to Gravity Forms, and fully integrates with Sliced Invoices.
+
 
 == Screenshots ==
 1. Sliced Invoices settings is added to the native Gravity Forms dropdown.
@@ -70,6 +77,13 @@ It will now automatically add a dropdown into the list field with your pre-defin
 
 
 == Changelog ==
+=1.10.0 =
+* NEW: option to populate line items from GF Product fields (instead of just a List field)
+* NEW: option to set quote/invoice status to something other than "draft"
+* NEW: option to automatically send quote/invoice to client
+* FIX: make sure payment options are populated when creating invoice
+* UPDATE: Update .pot file
+
 =1.09 =
 * NEW: Add hook 'sliced_gravityforms_feed_processed'
 * UPDATE: add explicit capabilities for use with Members plugin
