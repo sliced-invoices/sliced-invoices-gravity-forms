@@ -313,6 +313,12 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		update_post_meta( $id, '_sliced_' . $post_type . '_prefix', esc_html( $prefix ) );
 		update_post_meta( $id, '_sliced_' . $post_type . '_number', esc_html( $number ) );
 		update_post_meta( $id, '_sliced_order_number', esc_html( $this->get_field_value( $form, $entry, $mapped_order_num ) ) );
+		if ( $post_type === 'invoice' && function_exists( 'sliced_get_accepted_payment_methods' ) ) {
+			$payment = sliced_get_accepted_payment_methods();
+			update_post_meta( $id, '_sliced_payment_methods', array_keys($payment) );
+		}
+		
+		// update quote/invoice numbers
 		if ( $post_type === 'invoice' ) {
 			Sliced_Invoice::update_invoice_number( $id );
 		} else {
