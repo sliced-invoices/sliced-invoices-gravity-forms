@@ -440,13 +440,15 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 					}
 					$description = '';
 					if ( ! empty( $options ) ) {
-						$description = esc_html__( 'options: ', 'slicd-invoices-gravity-forms' ) . ' ' . implode( ', ', $options );
+						$description = esc_html__( 'options: ', 'sliced-invoices-gravity-forms' ) . ' ' . implode( ', ', $options );
 					}
 					$line_items[] = array(
-						'qty'         => esc_html( rgar( $product, 'quantity' ) ),
-						'title'       => esc_html( rgar( $product, 'name' ) ),
-						'description' => wp_kses_post( $description ),
-						'amount'      => GFCommon::to_number( rgar( $product, 'price', 0 ), $entry['currency'] ),
+						'qty'            => esc_html( rgar( $product, 'quantity' ) ),
+						'title'          => esc_html( rgar( $product, 'name' ) ),
+						'description'    => wp_kses_post( $description ),
+						'amount'         => GFCommon::to_number( rgar( $product, 'price', 0 ), $entry['currency'] ),
+						'taxable'        => 'on',
+						'second_taxable' => 'on',
 					);
 				}
 				if ( ! empty( $products['shipping']['name'] ) ) {
@@ -458,7 +460,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 					);
 				}
 				if ( ! empty( $line_items ) ) {
-					update_post_meta( $id, '_sliced_items', $line_items );
+					update_post_meta( $id, '_sliced_items', apply_filters( 'sliced_gravityforms_line_items', $line_items ) );
 				}
 				
 			}
@@ -478,14 +480,16 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 						$title = $exploded_item[0]; // must be from a plain text field
 					}
 					$items_array[] = array(
-						'qty'         => $item[0] ? esc_html( $item[0] ) : '',
-						'title'       => esc_html( trim( $title ) ),
-						'description' => $item[3] ? wp_kses_post( $item[3] ) : '',
-						'amount'      => $item[2] ? esc_html( $item[2] ) : '',
+						'qty'            => $item[0] ? esc_html( $item[0] ) : '',
+						'title'          => esc_html( trim( $title ) ),
+						'description'    => $item[3] ? wp_kses_post( $item[3] ) : '',
+						'amount'         => $item[2] ? esc_html( $item[2] ) : '',
+						'taxable'        => 'on',
+						'second_taxable' => 'on',
 					);
 				}
 			}
-			add_post_meta( $id, '_sliced_items', $items_array );
+			update_post_meta( $id, '_sliced_items', apply_filters( 'sliced_gravityforms_line_items', $items_array ) );
 			
 		}
 
