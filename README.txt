@@ -3,8 +3,8 @@ Contributors: SlicedInvoices
 Donate link: http://slicedinvoices.com/
 Tags: gravity forms, gravity forms add on, gravity invoice, gravity forms invoice, gravity forms estimate, gravity forms quote, invoice, invoicing, quotes, estimates, invoice clients, quote request, estimate request
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 1.10.0
+Tested up to: 4.9
+Stable tag: 1.11.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,10 @@ Yes! [Gravity Flow](https://gravityflow.io/) is a very powerful addition to Grav
 
 
 == Changelog ==
+=1.11.0 =
+* NEW: add filter 'sliced_gravityforms_line_items'
+* UPDATE: set line items to taxable by default
+
 =1.10.0 =
 * NEW: option to populate line items from GF Product fields (instead of just a List field)
 * NEW: option to set quote/invoice status to something other than "draft"
