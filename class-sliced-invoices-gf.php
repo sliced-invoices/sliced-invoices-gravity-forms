@@ -414,6 +414,17 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 			$payment = sliced_get_accepted_payment_methods();
 			update_post_meta( $id, '_sliced_payment_methods', array_keys($payment) );
 		}
+		$terms = false;
+		if ( $post_type === 'invoice' ) {
+			$invoices = get_option( 'sliced_invoices' );
+			$terms    = isset( $invoices['terms'] ) ? $invoices['terms'] : '';
+		} elseif ( $post_type === 'quote' ) {
+			$quotes   = get_option( 'sliced_quotes' );
+			$terms    = isset( $quotes['terms'] ) ? $quotes['terms'] : '';
+		}
+		if ( $terms ) {
+			update_post_meta( $id, '_sliced_' . $post_type . '_terms', sanitize_text_field( $terms ) );
+		}
 		
 		// update quote/invoice numbers
 		if ( $post_type === 'invoice' ) {
