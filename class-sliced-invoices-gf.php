@@ -640,17 +640,34 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	 */
 	public function maybe_add_client( $client_array ) {
 
-		// if client does not exist, create one
 		$client_id = null;
+		
 		if ( ! email_exists( $client_array['email'] ) ) {
-
+			/* if client does not exist, create one */
+			
+			// get the name
+			if ( ! empty( $client_array['name'] ) ) {
+				$name = esc_html( $client_array['name'] );
+			} else {
+				$name = 'sliced_client_' . wp_generate_password( 8, false ); // just in case
+			}
+			
+			// make sure $user_name is unique
+			$user_name = $name;
+			$index = 0;
+			while ( username_exists( $user_name ) ) {
+				$index++;
+				$user_name = $name . '_' . $index;
+			}
+			
 			// generate random password
 			$password = wp_generate_password( 10, true, true );
-			$name     = ! empty( $client_array['name'] ) ? $client_array['name'] : 'blank_name_' . $password; // just in case
-			$business = ! empty( $client_array['business'] ) ? $client_array['business'] : $name;
+			
+			// get the business name
+			$business = ! empty( $client_array['business'] ) ? esc_html( $client_array['business'] ) : $name;
 
 			// create the user
-			$client_id = wp_create_user( esc_html( $name ), esc_html( $password ), sanitize_email( $client_array['email'] ) );
+			$client_id = wp_create_user( $user_name, $password, sanitize_email( $client_array['email'] ) );
 
 			// add the user meta
 			add_user_meta( $client_id, '_sliced_client_business', wp_kses_post( $business ) );
@@ -663,12 +680,15 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 			$client_id = $client->ID;
 		}
 
-		// add the user to the post
-		update_post_meta( $client_array['post_id'], '_sliced_client', (int) $client_id );
+		if ( ! is_wp_error( $client_id ) ) {
+			// add the user to the post
+			update_post_meta( $client_array['post_id'], '_sliced_client', (int) $client_id );
+		}
 
 		return $client_id;
 
 	}
+	
 
 	/**
 	 * Target for the after_plugin_row action hook. Checks if Sliced Invoices is active and whether the current version of Gravity Forms
