@@ -457,7 +457,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 						'qty'            => esc_html( rgar( $product, 'quantity' ) ),
 						'title'          => esc_html( rgar( $product, 'name' ) ),
 						'description'    => wp_kses_post( $description ),
-						'amount'         => GFCommon::to_number( rgar( $product, 'price', 0 ), $entry['currency'] ),
+						'amount'         => Sliced_Shared::get_formatted_number( GFCommon::to_number( rgar( $product, 'price', 0 ), $entry['currency'] ) ),
 						'taxable'        => 'on',
 						'second_taxable' => 'on',
 					);
@@ -467,7 +467,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 						'qty'         => 1,
 						'title'       => esc_html( $products['shipping']['name'] ),
 						'description' => '',
-						'amount'      => GFCommon::to_number( rgar( $products['shipping'], 'price', 0 ), $entry['currency'] ),
+						'amount'      => Sliced_Shared::get_formatted_number( GFCommon::to_number( rgar( $products['shipping'], 'price', 0 ), $entry['currency'] ) ),
 					);
 				}
 				if ( ! empty( $line_items ) ) {
