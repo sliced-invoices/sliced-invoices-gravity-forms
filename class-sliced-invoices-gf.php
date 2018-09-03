@@ -423,7 +423,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 			$terms    = isset( $quotes['terms'] ) ? $quotes['terms'] : '';
 		}
 		if ( $terms ) {
-			update_post_meta( $id, '_sliced_' . $post_type . '_terms', sanitize_text_field( $terms ) );
+			update_post_meta( $id, '_sliced_' . $post_type . '_terms', $terms );
 		}
 		
 		// update quote/invoice numbers
