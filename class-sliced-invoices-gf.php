@@ -208,7 +208,8 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 							array(
 								'name'     => 'email',
 								'label'    => __( 'Client Email', 'sliced-invoices-gravity-forms' ),
-								'required' => 1
+								'required' => 1,
+								'tooltip'  => sprintf( __( 'If the form is submitted using an email address that already exists in your WP Users, then for security reasons any user details including the Client Name, Business Name, Address, and Extra Info will NOT be updated. <a href="%s" target="_blank">See FAQ</a>', 'sliced-invoices-gravity-forms' ), 'https://slicedinvoices.com/question/client-namebusiness-nameaddressextra-info-fields-not-updating-form-submitted/' ),
 							),
 							array(
 								'name'     => 'business',
