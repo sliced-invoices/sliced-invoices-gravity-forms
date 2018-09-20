@@ -4,7 +4,7 @@ Donate link: http://slicedinvoices.com/
 Tags: gravity forms, gravity forms add on, gravity invoice, gravity forms invoice, gravity forms estimate, gravity forms quote, invoice, invoicing, quotes, estimates, invoice clients, quote request, estimate request
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.12.2
+Stable tag: 1.12.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,10 @@ Yes! [Gravity Flow](https://gravityflow.io/) is a very powerful addition to Grav
 
 
 == Changelog ==
+=1.12.3 =
+* FIX: issue where additional tax settings not populated on quote/invoice automatically
+* FIX: issue where quote/invoice number suffix not populated automatically
+
 =1.12.2 =
 * FIX: allow html tags in "Terms & Conditions" field
 
