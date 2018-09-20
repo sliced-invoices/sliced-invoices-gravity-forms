@@ -397,23 +397,50 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		}
 		wp_set_object_terms( $id, array( $status ), $taxonomy );
 
-		// insert the post_meta
+		/*
+		 * add the postmetas
+		 */
+		// invoice/quote number
 		if ( $post_type === 'invoice' ) {
 			$prefix = sliced_get_invoice_prefix();
+			$suffix = sliced_get_invoice_suffix();
 			$number = $this->get_field_value( $form, $entry, $mapped_inv_num ) > '' ? $this->get_field_value( $form, $entry, $mapped_inv_num ) : sliced_get_next_invoice_number();
 		} else {
 			$prefix = sliced_get_quote_prefix();
+			$suffix = sliced_get_quote_suffix();
 			$number = $this->get_field_value( $form, $entry, $mapped_quote_num ) > '' ? $this->get_field_value( $form, $entry, $mapped_quote_num ) : sliced_get_next_quote_number();
 		}
 		update_post_meta( $id, '_sliced_description', wp_kses_post( $this->get_field_value( $form, $entry, $mapped_desc ) ) );
 		update_post_meta( $id, '_sliced_' . $post_type . '_created', time() );
 		update_post_meta( $id, '_sliced_' . $post_type . '_prefix', esc_html( $prefix ) );
 		update_post_meta( $id, '_sliced_' . $post_type . '_number', esc_html( $number ) );
+		update_post_meta( $id, '_sliced_' . $post_type . '_suffix', $suffix );
+		update_post_meta( $id, '_sliced_number', $prefix . $number . $suffix );
 		update_post_meta( $id, '_sliced_order_number', esc_html( $this->get_field_value( $form, $entry, $mapped_order_num ) ) );
+		
+		// update quote/invoice numbers for next time
+		if ( $post_type === 'invoice' ) {
+			Sliced_Invoice::update_invoice_number( $id );
+		} else {
+			Sliced_Quote::update_quote_number( $id );
+		}
+		
+		// tax
+		$tax = get_option( 'sliced_tax' );
+		update_post_meta( $id, '_sliced_tax_calc_method', Sliced_Shared::get_tax_calc_method( $id ) );
+		update_post_meta( $id, '_sliced_tax', sliced_get_tax_amount_formatted( $id ) );
+		update_post_meta( $id, '_sliced_tax_name', sliced_get_tax_name( $id ) );
+		update_post_meta( $id, '_sliced_additional_tax_name', isset( $tax['sliced_additional_tax_name'] ) ? $tax['sliced_additional_tax_name'] : '' );
+		update_post_meta( $id, '_sliced_additional_tax_rate', isset( $tax['sliced_additional_tax_rate'] ) ? $tax['sliced_additional_tax_rate'] : '' );
+		update_post_meta( $id, '_sliced_additional_tax_type', isset( $tax['sliced_additional_tax_type'] ) ? $tax['sliced_additional_tax_type'] : '' );
+		
+		// payment methods
 		if ( $post_type === 'invoice' && function_exists( 'sliced_get_accepted_payment_methods' ) ) {
 			$payment = sliced_get_accepted_payment_methods();
 			update_post_meta( $id, '_sliced_payment_methods', array_keys($payment) );
 		}
+		
+		// terms
 		$terms = false;
 		if ( $post_type === 'invoice' ) {
 			$invoices = get_option( 'sliced_invoices' );
@@ -424,13 +451,6 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		}
 		if ( $terms ) {
 			update_post_meta( $id, '_sliced_' . $post_type . '_terms', $terms );
-		}
-		
-		// update quote/invoice numbers
-		if ( $post_type === 'invoice' ) {
-			Sliced_Invoice::update_invoice_number( $id );
-		} else {
-			Sliced_Quote::update_quote_number( $id );
 		}
 
 		/*
