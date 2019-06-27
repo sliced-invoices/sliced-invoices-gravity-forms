@@ -362,21 +362,21 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	public function process_feed( $feed, $entry, $form ) {
 
 		$post_type          = strtolower( $feed['meta']['post_type'] );
-		$mapped_email       = $feed['meta']['mappedFields_email'];
-		$mapped_name        = $feed['meta']['mappedFields_name'];
-		$mapped_business    = $feed['meta']['mappedFields_business'];
-		$mapped_address     = $feed['meta']['mappedFields_address'];
-		$mapped_extra       = $feed['meta']['mappedFields_extra_info'];
-		$mapped_title       = $feed['meta']['mappedFields_title'];
-		$mapped_desc        = $feed['meta']['mappedFields_description'];
-		$mapped_quote_num   = $feed['meta']['mappedFields_quote_number'];
-		$mapped_inv_num     = $feed['meta']['mappedFields_invoice_number'];
-		$mapped_order_num   = $feed['meta']['mappedFields_order_number'];
-		$mapped_line_items  = $feed['meta']['mappedFields_line_items'];
-		$use_product_fields = $feed['meta']['use_product_fields'];
-		$set_quote_status   = $feed['meta']['set_quote_status'];
-		$set_invoice_status = $feed['meta']['set_invoice_status'];
-		$send_to_client     = $feed['meta']['send_to_client'];
+		$mapped_email       = isset( $feed['meta']['mappedFields_email'] )          ? $feed['meta']['mappedFields_email']          : false;
+		$mapped_name        = isset( $feed['meta']['mappedFields_name'] )           ? $feed['meta']['mappedFields_name']           : false;
+		$mapped_business    = isset( $feed['meta']['mappedFields_business'] )       ? $feed['meta']['mappedFields_business']       : false;
+		$mapped_address     = isset( $feed['meta']['mappedFields_address'] )        ? $feed['meta']['mappedFields_address']        : false;
+		$mapped_extra       = isset( $feed['meta']['mappedFields_extra_info'] )     ? $feed['meta']['mappedFields_extra_info']     : false;
+		$mapped_title       = isset( $feed['meta']['mappedFields_title'] )          ? $feed['meta']['mappedFields_title']          : false;
+		$mapped_desc        = isset( $feed['meta']['mappedFields_description'] )    ? $feed['meta']['mappedFields_description']    : false;
+		$mapped_quote_num   = isset( $feed['meta']['mappedFields_quote_number'] )   ? $feed['meta']['mappedFields_quote_number']   : false;
+		$mapped_inv_num     = isset( $feed['meta']['mappedFields_invoice_number'] ) ? $feed['meta']['mappedFields_invoice_number'] : false;
+		$mapped_order_num   = isset( $feed['meta']['mappedFields_order_number'] )   ? $feed['meta']['mappedFields_order_number']   : false;
+		$mapped_line_items  = isset( $feed['meta']['mappedFields_line_items'] )     ? $feed['meta']['mappedFields_line_items']     : false;
+		$use_product_fields = isset( $feed['meta']['use_product_fields'] )          ? $feed['meta']['use_product_fields']          : false;
+		$set_quote_status   = isset( $feed['meta']['set_quote_status'] )            ? $feed['meta']['set_quote_status']            : false;
+		$set_invoice_status = isset( $feed['meta']['set_invoice_status'] )          ? $feed['meta']['set_invoice_status']          : false;
+		$send_to_client     = isset( $feed['meta']['send_to_client'] )              ? $feed['meta']['send_to_client']              : false;
 		
 		$post_array = array(
 			'post_content' => '',
