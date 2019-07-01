@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Sliced Invoices & Gravity Forms\n"
-"POT-Creation-Date: 2017-07-07 01:40-0700\n"
+"POT-Creation-Date: 2019-07-01 16:56-0700\n"
 "PO-Revision-Date: 2017-07-07 01:40-0700\n"
 "Last-Translator: \n"
 "Language-Team: Sliced Invoices <info@slicedinvoices.com>\n"
@@ -60,99 +60,124 @@ msgstr ""
 msgid "Client Email"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:215
+#: class-sliced-invoices-gf.php:212
+#, php-format
+msgid ""
+"If the form is submitted using an email address that already exists in your "
+"WP Users, then for security reasons any user details including the Client "
+"Name, Business Name, Address, and Extra Info will NOT be updated. <a href="
+"\"%s\" target=\"_blank\">See FAQ</a>"
+msgstr ""
+
+#: class-sliced-invoices-gf.php:216
 msgid "Business Name"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:220
+#: class-sliced-invoices-gf.php:221
 msgid "Business Address"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:225
+#: class-sliced-invoices-gf.php:226
 msgid "Extra Info"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:230
+#: class-sliced-invoices-gf.php:231
 msgid "Title"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:235
+#: class-sliced-invoices-gf.php:236
 msgid "Description"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:240
+#: class-sliced-invoices-gf.php:241
 msgid "Line Items"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:242
+#: class-sliced-invoices-gf.php:243
 msgid ""
 "This must map to a \"List\" field in your form.  If you are using \"Product"
 "\" fields instead, leave this setting blank and check the \"Use Product "
 "field(s) for Line Items\" box below."
 msgstr ""
 
-#: class-sliced-invoices-gf.php:246
+#: class-sliced-invoices-gf.php:247
 msgid "Quote Number"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:255
+#: class-sliced-invoices-gf.php:256
 msgid "Invoice Number"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:264
+#: class-sliced-invoices-gf.php:265
 msgid "Order Number"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:274
+#: class-sliced-invoices-gf.php:275
 msgid "Use Product field(s) for Line Items"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:282
+#: class-sliced-invoices-gf.php:283
 msgid ""
 "If this box is checked, Sliced Invoices will search your form for any "
 "Product fields and create line items from them.  This will override anything "
 "else in your \"Line Items\" setting above."
 msgstr ""
 
-#: class-sliced-invoices-gf.php:309
+#: class-sliced-invoices-gf.php:310
 msgid "Send to client?"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:317
+#: class-sliced-invoices-gf.php:318
 msgid "Yes"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:321
+#: class-sliced-invoices-gf.php:322
 msgid "No"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:328
+#: class-sliced-invoices-gf.php:329
 msgid "Condition"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:330
+#: class-sliced-invoices-gf.php:331
 msgid "Enable Condition"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:331
+#: class-sliced-invoices-gf.php:332
 msgid "Process this feed if "
 msgstr ""
 
-#: class-sliced-invoices-gf.php:346
+#: class-sliced-invoices-gf.php:347
 msgid "Name"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:347
+#: class-sliced-invoices-gf.php:348
 msgid "Post Type"
 msgstr ""
 
-#: class-sliced-invoices-gf.php:443
+#: class-sliced-invoices-gf.php:475
 msgid "options: "
 msgstr ""
 
-#: class-sliced-invoices-gf.php:692
+#: class-sliced-invoices-gf.php:748
 #, php-format
 msgid "%sSliced Invoices%s is required."
+msgstr ""
+
+#: sliced-invoices-gravity-forms.php:28
+#, php-format
+msgid ""
+"Sliced Invoices & Gravity Forms extension cannot find the required <a href="
+"\"%s\">Sliced Invoices plugin</a>. Please make sure the core Sliced Invoices "
+"plugin is <a href=\"%s\">installed and activated</a>."
+msgstr ""
+
+#: sliced-invoices-gravity-forms.php:34
+#, php-format
+msgid ""
+"Sliced Invoices & Gravity Forms extension cannot find the required <a href="
+"\"%s\">Gravity Forms plugin</a>. Please make sure the Gravity Forms plugin "
+"is <a href=\"%s\">installed and activated</a>."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
