@@ -715,7 +715,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	 * Target for the after_plugin_row action hook. Checks if Sliced Invoices is active and whether the current version of Gravity Forms
 	 * is supported and outputs a message just below the plugin info on the plugins page.
 	 */
-	public function plugin_row() {
+	public function plugin_row( $plugin_name = '', $plugin_data = array() ) {
 		if ( ! self::is_gravityforms_supported( $this->_min_gravityforms_version ) ) {
 			$message = $this->plugin_message();
 			self::display_plugin_message( $message, true );
