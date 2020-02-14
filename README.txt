@@ -3,8 +3,8 @@ Contributors: SlicedInvoices
 Donate link: http://slicedinvoices.com/
 Tags: gravity forms, gravity forms add on, gravity invoice, gravity forms invoice, gravity forms estimate, gravity forms quote, invoice, invoicing, quotes, estimates, invoice clients, quote request, estimate request
 Requires at least: 4.0
-Tested up to: 5.2
-Stable tag: 1.12.4
+Tested up to: 5.3
+Stable tag: 1.12.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,9 @@ Yes! [Gravity Flow](https://gravityflow.io/) is a very powerful addition to Grav
 
 
 == Changelog ==
+=1.12.5 =
+* FIX: php warning due to recent Gravity Forms update
+
 =1.12.4 =
 * NEW: add requirements check. If either of the 2 required plugins are not found (Gravity Forms or Sliced Invoices), a notice will be displayed to tell you this.
 * FIX: php notice
