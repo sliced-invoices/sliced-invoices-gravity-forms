@@ -362,6 +362,13 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	public function process_feed( $feed, $entry, $form ) {
 
 		$post_type          = strtolower( $feed['meta']['post_type'] );
+		
+		if ( $post_type === 'invoice' ) {
+			$invoice_settings = get_option( 'sliced_invoices' );
+		} elseif ( $post_type === 'quote' ) {
+			$quote_settings = get_option( 'sliced_quotes' );
+		}
+		
 		$mapped_email       = isset( $feed['meta']['mappedFields_email'] )          ? $feed['meta']['mappedFields_email']          : false;
 		$mapped_name        = isset( $feed['meta']['mappedFields_name'] )           ? $feed['meta']['mappedFields_name']           : false;
 		$mapped_business    = isset( $feed['meta']['mappedFields_business'] )       ? $feed['meta']['mappedFields_business']       : false;
@@ -441,14 +448,25 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 			update_post_meta( $id, '_sliced_payment_methods', array_keys($payment) );
 		}
 		
+		// due date/valid until date
+		if ( $post_type === 'invoice' ) {
+			$due_date = Sliced_Invoice::get_auto_due_date();
+			if ( $due_date !== null ) {
+				update_post_meta( $id, '_sliced_invoice_due', $due_date );
+			}
+		} elseif ( $post_type === 'quote' ) {
+			$valid_until_date = Sliced_Quote::get_auto_valid_until_date();
+			if ( $valid_until_date !== null ) {
+				update_post_meta( $id, '_sliced_quote_valid_until', $valid_until_date );
+			}
+		}
+		
 		// terms
 		$terms = false;
 		if ( $post_type === 'invoice' ) {
-			$invoices = get_option( 'sliced_invoices' );
-			$terms    = isset( $invoices['terms'] ) ? $invoices['terms'] : '';
+			$terms = isset( $invoice_settings['terms'] ) ? $invoice_settings['terms'] : '';
 		} elseif ( $post_type === 'quote' ) {
-			$quotes   = get_option( 'sliced_quotes' );
-			$terms    = isset( $quotes['terms'] ) ? $quotes['terms'] : '';
+			$terms = isset( $quote_settings['terms'] ) ? $quote_settings['terms'] : '';
 		}
 		if ( $terms ) {
 			update_post_meta( $id, '_sliced_' . $post_type . '_terms', $terms );
