@@ -39,12 +39,12 @@ function sliced_gf_validate_settings() {
 
 	if ( ! class_exists( 'Sliced_Invoices' ) ) {
 		// Add a dashboard notice.
-		add_action( 'all_admin_notices', 'sliced_gf_requirements_not_met_notice_sliced' );
+		add_action( 'admin_notices', 'sliced_gf_requirements_not_met_notice_sliced' );
 	}
 	
 	if ( ! class_exists( 'GFForms' ) ) {
 		// Add a dashboard notice.
-		add_action( 'all_admin_notices', 'sliced_gf_requirements_not_met_notice_gf' );
+		add_action( 'admin_notices', 'sliced_gf_requirements_not_met_notice_gf' );
 	}
 }
 	
