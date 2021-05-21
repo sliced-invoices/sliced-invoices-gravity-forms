@@ -3,9 +3,9 @@ Contributors: SlicedInvoices
 Donate link: http://slicedinvoices.com/
 Tags: gravity forms, gravity forms add on, gravity invoice, gravity forms invoice, gravity forms estimate, gravity forms quote, invoice, invoicing, quotes, estimates, invoice clients, quote request, estimate request
 Requires at least: 4.0
-Tested up to: 5.3
-Stable tag: 1.12.5
-License: GPLv2 or later
+Tested up to: 5.7
+Stable tag: 1.13.0
+License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Create an invoice or quote request form using Gravity Forms. Each form entry then creates a quote (or an invoice) using the Sliced Invoices plugin.
@@ -77,67 +77,71 @@ Yes! [Gravity Flow](https://gravityflow.io/) is a very powerful addition to Grav
 
 
 == Changelog ==
-=1.12.5 =
+= 1.13.0 =
+* NEW: automatically set invoice due date or quote "valid until" date.
+* FIX: display issue with admin notices.
+
+= 1.12.5 =
 * FIX: php warning due to recent Gravity Forms update
 
-=1.12.4 =
+= 1.12.4 =
 * NEW: add requirements check. If either of the 2 required plugins are not found (Gravity Forms or Sliced Invoices), a notice will be displayed to tell you this.
 * FIX: php notice
 
-=1.12.3 =
+= 1.12.3 =
 * FIX: issue where additional tax settings not populated on quote/invoice automatically
 * FIX: issue where quote/invoice number suffix not populated automatically
 
-=1.12.2 =
+= 1.12.2 =
 * FIX: allow html tags in "Terms & Conditions" field
 
-=1.12.1 =
+= 1.12.1 =
 * FIX: issue where no client created if name is identical to one that already exists
 * FIX: issue where pricing fields are saved with wrong decimal separator, if decimal separator is not a period (".")
 
-=1.12.0 =
+= 1.12.0 =
 * UPDATE: insert default terms & conditions into newly generated quotes/invoices
 
-=1.11.0 =
+= 1.11.0 =
 * NEW: add filter 'sliced_gravityforms_line_items'
 * UPDATE: set line items to taxable by default
 
-=1.10.0 =
+= 1.10.0 =
 * NEW: option to populate line items from GF Product fields (instead of just a List field)
 * NEW: option to set quote/invoice status to something other than "draft"
 * NEW: option to automatically send quote/invoice to client
 * FIX: make sure payment options are populated when creating invoice
 * UPDATE: Update .pot file
 
-=1.09 =
+= 1.09 =
 * NEW: Add hook 'sliced_gravityforms_feed_processed'
 * UPDATE: add explicit capabilities for use with Members plugin
 
-=1.08 =
+= 1.08 =
 * UPDATE: compatibility with Sliced Invoices v3.3.0
 
-=1.07 =
+= 1.07 =
 * FIX: Translation issue preventing correct processing of feed
 
-=1.06 =
+= 1.06 =
 * UPDATE: allow line items to work without GF dynamic population
 
-=1.05 =
+= 1.05 =
 * NEW: add support for qTranslate X (i18n multilingual)
 * UPDATE: Add ability to map custom invoice numbers
 * FIX: Quotes & Invoices created via feed not incrementing quote number / invoice number
 
-=1.04 =
+= 1.04 =
 * UPDATE: Add ability to map custom quote numbers
 
-=1.03 =
+= 1.03 =
 * UPDATE: Integration with Gravity Flow - gravityflow.io
 
-=1.02 =
+= 1.02 =
 * UPDATE: Add ability to include pre-defined line items
 
-=1.01 =
+= 1.01 =
 * FIX: Minor bug fixes
 
-=1.0 =
+= 1.0 =
 * Initial release at WordPress.org
