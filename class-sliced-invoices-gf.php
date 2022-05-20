@@ -209,7 +209,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 								'name'     => 'email',
 								'label'    => __( 'Client Email', 'sliced-invoices-gravity-forms' ),
 								'required' => 1,
-								'tooltip'  => sprintf( __( 'If the form is submitted using an email address that already exists in your WP Users, then for security reasons any user details including the Client Name, Business Name, Address, and Extra Info will NOT be updated. <a href="%s" target="_blank">See FAQ</a>', 'sliced-invoices-gravity-forms' ), 'https://slicedinvoices.com/question/client-namebusiness-nameaddressextra-info-fields-not-updating-form-submitted/' ),
+								'tooltip'  => sprintf( __( 'If the form is submitted using an email address that already exists in your WP Users, then for security reasons any user details including the Client Name, Business Name, Address, and Extra Info will NOT be updated. <a href="%s" target="_blank">See FAQ</a>', 'sliced-invoices-gravity-forms' ), 'https://slicedinvoices.com/question/client-namebusiness-nameaddressextra-info-fields-not-updating-form-submitted/?utm_source=feed_settings_client_email&utm_campaign=free&utm_medium=sliced_invoices_gravity_forms' ),
 							),
 							array(
 								'name'     => 'business',
@@ -763,7 +763,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	 */
 	public function plugin_message() {
 		if ( ! class_exists( 'Sliced_Invoices' ) ) {
-			return sprintf( esc_html__( '%sSliced Invoices%s is required.', 'sliced-invoices-gravity-forms' ), "<a href='https://slicedinvoices.com/'>", '</a>' );
+			return sprintf( esc_html__( '%sSliced Invoices%s is required.', 'sliced-invoices-gravity-forms' ), "<a href='https://slicedinvoices.com/?utm_source=notice_missing_sliced_invoices&utm_campaign=free&utm_medium=sliced_invoices_gravity_forms'>", '</a>' );
 		}
 
 		return parent::plugin_message();
