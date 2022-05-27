@@ -9,7 +9,7 @@ GFForms::include_feed_addon_framework();
 
 class Sliced_Invoices_GF extends GFFeedAddOn {
 
-	protected $_version = '1.13.0';
+	protected $_version = '1.13.1';
 	protected $_min_gravityforms_version = '1.9.10';
 	protected $_slug = 'slicedinvoices';
 	protected $_path = 'sliced-invoices-gravity-forms/sliced-invoices-gravity-forms.php';
@@ -128,8 +128,10 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 	}
 
 	/**
-	 * Settings fields
-	 * @since  1.0.0
+	 * Settings fields.
+	 * 
+	 * @version 1.13.1
+	 * @since   1.0.0
 	 */
 	public function feed_settings_fields() {
 		
@@ -758,7 +760,9 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 
 	/**
 	 * Returns the message that will be displayed if the current version of Gravity Forms is not supported or Sliced Invoices is not active.
-	 *
+	 * 
+	 * @version 1.13.1
+	 * 
 	 * @return string
 	 */
 	public function plugin_message() {
