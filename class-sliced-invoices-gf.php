@@ -447,7 +447,7 @@ class Sliced_Invoices_GF extends GFFeedAddOn {
 		// payment methods
 		if ( $post_type === 'invoice' && function_exists( 'sliced_get_accepted_payment_methods' ) ) {
 			$payment = sliced_get_accepted_payment_methods();
-			update_post_meta( $id, '_sliced_payment_methods', array_keys($payment) );
+			update_post_meta( $id, '_sliced_payment_methods', array_keys( $payment ) );
 		}
 		
 		// due date/valid until date
